@@ -12,10 +12,18 @@
 
 #include "get_next_line.h"
 
+/* TO DO
+
+** figure out how to free store_buf calls that are not returned
+
+** figure out how to set *temp = buf; properly
+
+** figure out why BUF_SIZE = 10000000 does not work 
+*/
+
 int		*parse_line(char **buf)
 {
 	int		i;
-	char	*str;
 
 	i = 0;
 	while (i < BUF_SIZE)
@@ -30,10 +38,19 @@ int		*parse_line(char **buf)
 	return (i);
 }
 
-int		get_next_line_helper(const int fd, char **line, int flag, int alloc_count)
+char	*store_buf(char *buf, char *store, int l_status, int alloc_count)
 {
-	char	*temp;
-	char	*line_alloc;
+	char	*str;
+
+	str = ft_strnew(alloc_count);
+	ft_strncpy(str, store, alloc_count - l_status);
+	ft_strcat(str, buf);
+	return (str)
+}
+
+int		read_line(const int fd, char **line, int flag, int alloc_count)
+{
+	char	**temp;
 	int		r_status;
 	int		l_status;
 	char	buf[BUF_SIZE];
@@ -44,14 +61,12 @@ int		get_next_line_helper(const int fd, char **line, int flag, int alloc_count)
 			return (-1);
 		else if (r_status == 0 && flag)
 			return (0);
-		*line = buf;
-		l_status = parse_line(line);
+		flag = 0;
+		l_status = parse_line(buf);
 		if (l_status < BUF_SIZE)
 			break ;
-		str = ft_strnew((alloc_count += l_status));
-		ft_strncpy(str, buf, alloc_count);
-
-		flag = 0;
+		alloc_count += l_status;
+		*line = store_buf(buf, *line, l_status, alloc_count);
 	}
 	return (1);
 }
