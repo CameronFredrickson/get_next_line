@@ -18,7 +18,21 @@
 
 ** figure out how to set *temp = buf; properly
 
-** figure out why BUF_SIZE = 10000000 does not work 
+** figure out why BUF_SIZE = 10000000 does not work
+** 		1. currently limit stacksize is 8MB 10MB would exceed this limit
+**		   forcing the program to terminate
+**		2. typing ulimit (user limits command):
+**		   ulimits -Ss will return a soft stack limit of 8192 KB
+**		   ulimits -Hs will return a hard stack limit of 65532 KB
+**		   therefore, the soft stack limit can be changed to 10000KB to
+**		   accomadate a BUF_SIZE = 10000000 
+**		*. -a : All current limits are reported
+**		*. -n : the maximum number of open file descriptors
+**		*. -p : the pipe buffer size
+**		*. -t : the maximum cpu time in seconds
+**		*. -u : the maximum number of processes available to a single user
+
+** figure out how to push to both repos with one git push
 */
 
 int		*parse_line(char **buf)
