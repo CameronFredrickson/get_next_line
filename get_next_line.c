@@ -12,13 +12,10 @@
 
 #include "get_next_line.h"
 
-/* TO DO
+/*
+** TO DO
 
-** figure out how to free store_buf calls that are not returned
-
-** figure out how to set *temp = buf; properly
-
-** figure out why BUF_SIZE = 10000000 does not work
+** figure out why BUF_SIZE = 10000000 does not work : 1
 ** 		1. currently limit stacksize is 8MB 10MB would exceed this limit
 **		   forcing the program to terminate
 **		2. typing ulimit (user limits command):
@@ -32,67 +29,33 @@
 **		*. -t : the maximum cpu time in seconds
 **		*. -u : the maximum number of processes available to a single user
 
-** figure out how to push to both repos with one git push
+** figure out how to protect against a null or garbage pointer passed in 
+** as char **line : 0
+
+** figure out how to push to both repos with one git push : 0
+
+** read in the whole file and save each line in a linked list : 0
 */
 
-int		*parse_line(char **buf)
+void	store_file(t_list *file_p)
 {
-	int		i;
+	t_list			*file;
+	char			*new_content;
+	int				status;
+	char			buf[BUF_SIZE];
 
-	i = 0;
-	while (i < BUF_SIZE)
+	file = ft_lstnew(0, fd);
+	while ((status = read(fd, buf, BUF_SIZE)) && status != -1)
 	{
-		if ((*buf)[i] == '\n' || (*buf)[i] == 0)
-		{
-			(*buf)[i] = 0;
-			break ;
-		}
-		i++;
+		new_content = ft_strnew(ft_strlen(file->content) + ft_strlen(buf));
+		ft_strcpy(new_content, file->content);
+		ft_strcat(new_content, buf);
+		file->content = new_content;
 	}
-	return (i);
-}
-
-char	*store_buf(char *buf, char *store, int l_status, int alloc_count)
-{
-	char	*str;
-
-	str = ft_strnew(alloc_count);
-	ft_strncpy(str, store, alloc_count - l_status);
-	ft_strcat(str, buf);
-	return (str)
-}
-
-int		read_line(const int fd, char **line, int flag, int alloc_count)
-{
-	char	**temp;
-	int		r_status;
-	int		l_status;
-	char	buf[BUF_SIZE];
-
-	while (1)
-	{
-		if ((r_status = read(fd, buf, BUF_SIZE)) < 0)
-			return (-1);
-		else if (r_status == 0 && flag)
-			return (0);
-		flag = 0;
-		l_status = parse_line(buf);
-		if (l_status < BUF_SIZE)
-			break ;
-		alloc_count += l_status;
-		*line = store_buf(buf, *line, l_status, alloc_count);
-	}
-	return (1);
+	file_p = file;
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	int		helper_status;
-
-	helper_status = get_next_line_helper(fd, line, 1, 0);
-	if (helper_status < 0)
-		return (-1);
-	else if (helper_status == 0)
-		return (0);
-	return (1);
+	static t_list	*fd_p;
 }
