@@ -12,12 +12,20 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUF_SIZE 32
+# define BUF_SIZE 47
 
 # include <fcntl.h>
 # include <stdlib.h>
-# include "libft/includes/libft.h"
+# include "libft.h"
 
-int		get_next_line(const int fd, char **line);
+typedef	struct		s_file
+{
+	char			*content;
+	char			*content_p;
+	int				fd;
+	struct s_file	*next;
+}					t_file;
+
+int					get_next_line(const int fd, char **line);
 
 #endif
