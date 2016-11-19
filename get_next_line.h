@@ -12,11 +12,12 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUF_SIZE 47
 
 # include <fcntl.h>
 # include <stdlib.h>
 # include "libft.h"
+
+# define BUFF_SIZE 47
 
 typedef	struct		s_file
 {
