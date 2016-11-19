@@ -87,7 +87,7 @@ static char		*line_cpy(char *content)
 ** Sets the line pointer to the next line in the file
 
 ** @param 	the address of the head of the list of t_files
-** @param 	the address of a string to which the line from a 
+** @param 	the address of a string to which the line from a
 ** file descriptor will be stored
 
 ** @return	1: a new line has been read
@@ -127,15 +127,15 @@ static t_file	*store_file(t_file **file_p, int fd)
 	t_file	*file;
 	char	*new_content;
 	int		status;
-	char	buf[BUF_SIZE];
+	char	buf[BUFF_SIZE];
 
-	ft_memset(buf, 0, BUF_SIZE);
+	ft_memset(buf, 0, BUFF_SIZE);
 	if (!(file = (t_file *)malloc(sizeof(t_file))))
 		return (0);
 	file->content = 0;
 	file->fd = fd;
 	file->next = 0;
-	while ((status = (int)read(fd, buf, BUF_SIZE)))
+	while ((status = (int)read(fd, buf, BUFF_SIZE)))
 	{
 		if (status == -1)
 			return (0);
@@ -168,7 +168,7 @@ int				get_next_line(const int fd, char **line)
 	static t_file	*head;
 	t_file			*file;
 
-	if (BUF_SIZE < 1 || BUF_SIZE > 8192000 || fd < 0 || fd > 256 || !line)
+	if (BUFF_SIZE < 1 || BUFF_SIZE > 8192000 || fd < 0 || fd > 256 || !line)
 		return (-1);
 	file = 0;
 	if (head)
