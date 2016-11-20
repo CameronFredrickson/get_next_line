@@ -15,7 +15,7 @@
 /*
 ** Frees the necessary information, once all of the lines have been returned
 ** from a t_file
-
+**
 ** @param 	the address of the head of the list of t_files
 ** @param 	a pointer to the file to be freed fom the list
 */
@@ -51,9 +51,9 @@ static void		free_node(t_file **head, t_file *search)
 
 /*
 ** Copies the contents of a string to a new string w/o the '\n' character
-
+**
 ** @param 	a string to be copied
-
+**
 ** @return	a copy of the param string without '\n' character
 */
 
@@ -85,11 +85,11 @@ static char		*line_cpy(char *content)
 
 /*
 ** Sets the line pointer to the next line in the file
-
+**
 ** @param 	the address of the head of the list of t_files
 ** @param 	the address of a string to which the line from a
 ** file descriptor will be stored
-
+**
 ** @return	1: a new line has been read
 ** @return	0: reading has been completed
 */
@@ -153,11 +153,11 @@ static t_file	*store_file(t_file **file_p, int fd)
 
 /*
 ** Gets a line of characters from a file descriptor
-
+**
 ** @param 	the address of a string to which the line from a 
 ** file descriptor will be stored
 ** @param	a file descriptor
-
+**
 ** @return	1: a new line has been read
 ** @return	0: reading has been completed
 ** @return	-1: an error has occured 
