@@ -115,10 +115,10 @@ static int		get_line(t_file **head, t_file *file, char **line)
 /*
 ** Stores the contents of a file descriptor in a t_file added
 ** to a list of t_files
-
+**
 ** @param 	the address of the head of the list of t_files
 ** @param 	the file descriptor to be read from
-
+**
 ** @return	the newly created t_file
 */
 
@@ -154,13 +154,13 @@ static t_file	*store_file(t_file **file_p, int fd)
 /*
 ** Gets a line of characters from a file descriptor
 **
-** @param 	the address of a string to which the line from a 
+** @param 	the address of a string to which the line from a
 ** file descriptor will be stored
 ** @param	a file descriptor
 **
 ** @return	1: a new line has been read
 ** @return	0: reading has been completed
-** @return	-1: an error has occured 
+** @return	-1: an error has occured
 */
 
 int				get_next_line(const int fd, char **line)
