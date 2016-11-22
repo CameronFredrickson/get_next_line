@@ -43,8 +43,8 @@ static void		free_node(t_file **head, t_file *search)
 	}
 	if (n_to_free->fd == search->fd)
 	{
-		free(n_to_free);
 		free(n_to_free->content);
+		free(n_to_free);
 		*head = 0;
 	}
 }
