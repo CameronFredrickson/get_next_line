@@ -6,7 +6,7 @@
 /*   By: cfredric <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/16 11:28:08 by cfredric          #+#    #+#             */
-/*   Updated: 2016/11/16 11:28:09 by cfredric         ###   ########.fr       */
+/*   Updated: 2016/11/21 19:19:10 by cfredric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char		*line_cpy(char *content)
 
 	i = 0;
 	if (!content)
-		return (ft_strnew(i));
+		return (ft_strnew(0));
 	while (content[i])
 	{
 		if (content[i] == '\n')
