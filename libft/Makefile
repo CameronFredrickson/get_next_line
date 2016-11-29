@@ -6,7 +6,7 @@
 #    By: cfredric <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/21 09:35:23 by cfredric          #+#    #+#              #
-#    Updated: 2016/10/05 13:58:33 by cfredric         ###   ########.fr        #
+#    Updated: 2016/11/29 11:06:17 by cfredric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SOURCE  = 	ft_memset.c		ft_memalloc.c	ft_lstnew.c				\
 			ft_strcpy.c		ft_strequ.c		ft_setbit.c				\
 			ft_strncpy.c	ft_strnequ.c	ft_print_binary_octet.c	\
 			ft_strcat.c		ft_strsub.c		ft_reverse_str.c		\
-			ft_strncat.c	ft_strjoin.c	ft_itoa_base.c			\
+			ft_strncat.c	ft_strjoin.c	\
 			ft_strlcat.c	ft_strtrim.c	\
 			ft_strchr.c		ft_strsplit.c	\
 			ft_strrchr.c	ft_itoa.c		\
