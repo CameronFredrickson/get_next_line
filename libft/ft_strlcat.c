@@ -10,7 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Concatenates two strings guaranteeing to NUL-terminate the result as long
+** as there is at least one free byte in the destination string
+**
+** ft_strlcat appends the NUL-terminated string src to the
+** end of dst.  It will append at most size - strlen(dst) - 1 bytes,
+** NUL-terminating the result
+**
+** Note however, that if ft_strlcat traverses size characters without
+** finding a NUL, the length of the string is considered to be size
+** and the destination string will not be NUL-terminated (since there
+** was no space for the NUL)
+**
+** @param	string to store the concatenation
+** @param	string to be concatenated with dst
+** @param	sie of the string you are trying to create
+**
+** @return	the total length of the string the function tried to create
+*/
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {

@@ -10,7 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Tells the caller whether or not the argument passed is a valid white space
+** character
+**
+** @param	an int representing the value of a character to be tested
+**
+** @return	1: if the value is a valid white space character
+**			0: if the value is not a valid white space character
+*/
 
 static int	f_isspace(int c)
 {
@@ -20,14 +30,16 @@ static int	f_isspace(int c)
 	return (0);
 }
 
-static char	*alloc_cpy(char const *s)
-{
-	char	*new;
-
-	new = ft_strnew(ft_strlen(s));
-	ft_strcpy(new, s);
-	return (new);
-}
+/*
+** Creates an allocated copy of the string s without white space at the
+** begining or at the end of the string
+**
+** @param	the string to be copied
+**
+** @return	the copied string without whitespace at the
+** 			begining or at the end of the string
+**			NULL if s is a NULL pointer or with the allocation fails
+*/
 
 char		*ft_strtrim(char const *s)
 {
@@ -49,7 +61,7 @@ char		*ft_strtrim(char const *s)
 	while (f_isspace(s[new_len]))
 		new_len--;
 	if (index == 0 && new_len + 1 == ft_strlen(s))
-		return (alloc_cpy(s));
+		return (ft_strdup(s));
 	new = ft_strsub(s, index, new_len - index + 1);
 	if (!new)
 		return (NULL);

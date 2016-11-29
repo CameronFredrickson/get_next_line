@@ -10,7 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Iterates through a list applying the param f to each link in the list,
+** creating a new list from the successive applications of f
+**
+** @param 	a pointer to a node in the list
+** @param 	a pointer to a function applied to each node, using malloc to
+**			create a new node
+*/
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
@@ -24,16 +33,14 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	{
 		new->content = NULL;
 		new->content_size = 0;
+		return (new);
 	}
-	else
-	{
-		dest = ft_memalloc(content_size);
-		if (!dest)
-			return (NULL);
-		content_cpy = ft_memcpy(dest, content, content_size);
-		new->content = (void *)content_cpy;
-		new->content_size = content_size;
-	}
+	dest = ft_memalloc(content_size);
+	if (!dest)
+		return (NULL);
+	content_cpy = ft_memcpy(dest, content, content_size);
+	new->content = (void *)content_cpy;
+	new->content_size = content_size;
 	new->next = NULL;
 	return (new);
 }

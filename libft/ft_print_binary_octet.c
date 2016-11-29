@@ -10,7 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Outputs the bits of an unsigned char octet
+**
+** @param	a octet of bits as an unsigned char
+*/
 
 void	ft_print_binary_octet(unsigned char octet)
 {

@@ -10,7 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Sets the nth bit in a byte
+**
+** @param	the byte in which a bit will be set
+** @param	the bit to be set counting from right to left
+**
+** @return	the byte containing the newly set bit
+*/
 
 unsigned char	ft_setbit(unsigned char val, unsigned char nth_bit)
 {

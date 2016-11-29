@@ -10,7 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Writes a character
+**
+** @param	a character to be written to the standard output
+*/
 
 void	ft_putchar(char c)
 {

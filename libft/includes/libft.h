@@ -90,4 +90,5 @@ long				ft_int_len(long n);
 unsigned char		ft_setbit(unsigned char val, unsigned char nth_bit);
 void				ft_print_binary_octet(unsigned char octet);
 char				*ft_reverse_str(char *s);
+char				*ft_itoa_base(int value, int base);
 #endif

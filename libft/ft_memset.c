@@ -10,7 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Fills a byte string with a byte value
+**
+** @param 	byte string
+** @param 	the byte value to fill the byte string with
+** @param	the number of bytes to be replaced
+**
+** @return	a pointer to the newly set memory
+*/
 
 void	*ft_memset(void *str, int c, size_t n)
 {
@@ -20,9 +30,6 @@ void	*ft_memset(void *str, int c, size_t n)
 	new = (unsigned char *)str;
 	index = 0;
 	while (index < n)
-	{
-		new[index] = (char)c;
-		index++;
-	}
+		new[index++] = (unsigned char)c;
 	return (str);
 }

@@ -10,7 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Creates a allocated copy of a given string
+**
+** @param	string to copy
+**
+** @return	the newly duplicated string
+*/
 
 char	*ft_strdup(const char *s1)
 {

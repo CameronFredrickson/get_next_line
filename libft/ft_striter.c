@@ -10,11 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Applies the function f to each character in the string
+**
+** @param	string to be motified
+** @param	function used to modify each character in the string
+*/
+
 void	ft_striter(char *s, void (*f)(char *))
 {
+	if (!s)
+		return ;
 	while (*s)
-	{
-		f(s);
-		s++;
-	}
+		f(s++);
 }

@@ -10,7 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Locates the first occurance of a specific byte in a byte string
+**
+** @param	byte string
+** @param	the byte value to be located
+** @param	the number of bytes contained in the byte string
+**
+** @return	a byte string whose starting byte is the located byte,
+**			if the byte value is not found NULL is returned
+*/
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

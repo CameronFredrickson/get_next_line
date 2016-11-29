@@ -10,7 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Iterates through a list applying the param f to each link in the list,
+** creating a new list from the successive applications of f
+**
+** @param 	a pointer to a node in the list
+** @param 	a pointer to a function applied to each node, using malloc to
+**			create a new node
+*/
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {

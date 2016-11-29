@@ -10,7 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Converts an integer to a string representation of its value
+**
+** @param 	an int
+**
+** @return	a string representation of the param
+*/
 
 static size_t	int_len(int n)
 {

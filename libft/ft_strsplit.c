@@ -10,7 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Allocates an array of strings to store each of the strings delimited by
+** the character c in the string s
+**
+** @param	the string conatining the delimited strings
+** @param	the delimiting character
+**
+** @return	an array of strings to store each of the strings delimited by
+**			the character c in the string s
+*/
 
 static	char	**arr_alloc(char const *s, char c)
 {
@@ -37,6 +48,18 @@ static	char	**arr_alloc(char const *s, char c)
 	alloc[size] = 0;
 	return (alloc);
 }
+
+/*
+** Allocates an a string to store each string delimited by
+** the character c in the string s
+**
+** @param	the string conatining the delimited strings
+** @param	the delimiting character
+** @param	the array of strings to store the delimited strings
+**
+** @return	1 if all delimited strings are successfully allocated
+**			or a NULL pointer if an allocation fails
+*/
 
 static int		str_alloc(char const *s, char c, char **arr)
 {
@@ -67,6 +90,15 @@ static int		str_alloc(char const *s, char c, char **arr)
 	return (1);
 }
 
+/*
+** Fills the array of strings with each of the strings delimited by
+** the character c in the string s
+**
+** @param	the string conatining the delimited strings
+** @param	the delimiting character
+** @param	the array of strings to store the delimited strings
+*/
+
 static void		fill_in(char const *s, char c, char **arr)
 {
 	size_t	i;
@@ -92,6 +124,17 @@ static void		fill_in(char const *s, char c, char **arr)
 			i++;
 	}
 }
+
+/*
+** Creates an array of strings to containing each of the strings
+** delimited by the character c in the string s
+**
+** @param	the string conatining the delimited strings
+** @param	the delimiting character
+**
+** @return	an array of strings to containing each of the strings
+**			delimited by the character c in the string s
+*/
 
 char			**ft_strsplit(char const *s, char c)
 {

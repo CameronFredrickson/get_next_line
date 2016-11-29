@@ -10,6 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Checks if the int is a valid ascii value
+**
+** @param 	an int
+**
+** @return	1: if the param is an ascii value 0-127
+**			0: otherwise
+*/
+
 int		ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)

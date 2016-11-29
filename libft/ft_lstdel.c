@@ -10,7 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Deletes the contents of a list
+**
+** @param 	the address of the pointer to head of the list
+** @param 	a pointer to a function used to free the members of each node in
+**			the list
+*/
 
 void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
@@ -21,6 +29,6 @@ void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 		tmp = *alst;
 		*alst = (*alst)->next;
 		del((tmp)->content, (tmp)->content_size);
-		ft_memdel((void **)&tmp);
+		free(tmp);
 	}
 }

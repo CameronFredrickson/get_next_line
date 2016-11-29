@@ -10,7 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Writes a character to file
+**
+** @param	the character to be written to the file
+** @param	the file descriptor the character will be written to
+*/
 
 void	ft_putchar_fd(char c, int fd)
 {

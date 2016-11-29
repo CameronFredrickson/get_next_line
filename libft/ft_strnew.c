@@ -10,7 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Allocates a new NUL-terminated string of length size, where each character
+** in the string is initialized to 0
+**
+** @param	the size of the allocated string
+**
+** @return	the allocated string
+*/
 
 char	*ft_strnew(size_t size)
 {

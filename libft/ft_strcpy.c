@@ -10,13 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Copies the characters from the source string to the destination string
+**
+** @param	string to copy from
+** @param	string to copy to
+**
+** @return	the new copy of the source string
+*/
+
 char	*ft_strcpy(char *dest, const char *src)
 {
 	int		index;
 
 	index = 0;
-	if (!src)
-		return (dest);
 	while (src[index])
 	{
 		dest[index] = src[index];

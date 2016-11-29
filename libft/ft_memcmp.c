@@ -10,7 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Compares two byte strings up to n bytes
+**
+** @param	byte string to be compared
+** @param	byte string to be compared
+** @param	the number of bytes to be compared
+**
+** @return	0 if the values of all bytes compared are the same
+**			otherwise, the differences between the two bytes is returned
+*/
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {

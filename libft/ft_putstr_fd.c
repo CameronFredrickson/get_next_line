@@ -10,7 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Writes a character string to a given file descriptor
+**
+** @param	the character string to be written to a file
+** @param	the file descriptor the character string will be written to
+*/
 
 void	ft_putstr_fd(char const *s, int fd)
 {
@@ -20,8 +27,5 @@ void	ft_putstr_fd(char const *s, int fd)
 		return ;
 	index = 0;
 	while (s[index])
-	{
-		ft_putchar_fd(s[index], fd);
-		index++;
-	}
+		write(fd, &s[index++], 1);
 }

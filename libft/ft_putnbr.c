@@ -10,7 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Gives the length of a long int
+**
+** @param 	a long
+**
+** @return	an int representing the length of the param
+*/
 
 static int		int_len(long n)
 {
@@ -27,6 +35,13 @@ static int		int_len(long n)
 	return (count);
 }
 
+/*
+** Sets all of the characters in a string to 0
+**
+** @param 	a string a characters
+** @param 	the length of the string
+*/
+
 static void		clear_buf(char *s, int size)
 {
 	int		index;
@@ -35,6 +50,12 @@ static void		clear_buf(char *s, int size)
 	while (index < size)
 		s[index++] = 0;
 }
+
+/*
+** Writes the int to the standard input
+**
+** @param 	an int to be written
+*/
 
 void			ft_putnbr(int n)
 {

@@ -10,17 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Reverses the characters of a string in place
+**
+** @param	the character string to be reversed
+**
+** @return	the reversed character string
+*/
 
 char	*ft_reverse_str(char *s)
 {
 	size_t		swaps;
 	size_t		index;
 	size_t		end;
+	size_t		len;
 	char		temp;
 
-	end = ft_strlen(s) - 1;
-	swaps = ft_strlen(s) / 2;
+	len = ft_strlen(s);
+	end = len - 1;
+	swaps = len / 2;
 	index = 0;
 	if (!s)
 		return (NULL);

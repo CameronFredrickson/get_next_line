@@ -10,7 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Locates a string within another string
+**
+** @param	the string to be searched
+** @param	the string to be searched for
+**
+** @return	a pointer to the location of the substring within the search string
+**			or NULL if the substring is not found
+*/
 
 char		*ft_strstr(const char *big, const char *little)
 {

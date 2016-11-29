@@ -10,7 +10,58 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Copies len bytes from one byte string to another
+** This is done in a non-destructive manner.
+** Reverse_memcpy is used in cases where normal copying can be destructive
+** to the memory being copied, i.e. where memory overlaps
+**
+** I want to copy 'a', 'b', 'c' into memory contatining 'c', 'd', 'e'
+** (these locations in memory overlap)
+**
+**         | c | d | e |
+** | a | b | c |
+**
+** If 'a' is copied to the location conatining 'c',
+** I will not be able to copy 'c' to the location containing 'e'
+**
+**         | c | d | e |
+** | a | b | c |
+**
+**
+** After 'a' is copied:
+**
+**         | a | d | e |
+** | a | b | a |
+**
+** the value of at location of 'c' is now 'a'.
+**
+** In order to avoid these circumstances we will copy from the back of the
+** source string in situations where the destination string
+** exists at larger address value than the source string
+** and the location of the two strings overlap in memory
+** i.e "reverse memcpy"
+**
+**         | c | d | e |
+** | a | b | c |
+**
+**         | c | d | c |
+** | a | b | c |
+**
+**         | c | b | c |
+** | a | b | c |
+**
+**         | a | b | c |
+** | a | b | a |
+**
+** @param	byte string to be copied
+** @param	byte string containing the copied bytes
+** @param	the number of bytes to be copied
+**
+** @return	the newly copied byte string
+*/
 
 static void		*reverse_memcpy(void *dest, void *src, size_t len)
 {

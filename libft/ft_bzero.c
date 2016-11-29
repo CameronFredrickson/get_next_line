@@ -10,9 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Writes zeros to each byte in a byte string
+**
+** @param 	a byte string
+**
+** @param	the number of bytes in string
+*/
 
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, 0, n);
+	unsigned char	*mem;
+	size_t			index;
+
+	mem = (unsigned char *)s;
+	index = 0;
+	while (index < n)
+		mem[index++] = 0;
 }

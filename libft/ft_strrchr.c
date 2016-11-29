@@ -10,7 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Locates the first occurence of the character value c in the string s
+**
+** @param	the string to be searched
+** @param	the charater to be searched for
+**
+** @return	a pointer to the first location of the character c in the string s
+**			if the character c is not found within the string s a NULL pointer
+**			is returned
+*/
 
 char	*ft_strrchr(const char *s, int c)
 {

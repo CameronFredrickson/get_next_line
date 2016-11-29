@@ -10,6 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Checks if the int is a numeric ascii value '0'-'9'
+**
+** @param 	an int
+**
+** @return	1: if the param is an ascii value 48-57
+**			0: otherwise
+*/
+
 int		ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)

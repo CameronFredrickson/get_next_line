@@ -10,24 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Locates the first occurence of a character in a string
+**
+** @param	the string to be searched
+** @param	the character value to be located
+**
+** @return	a string with the located character at the starting address
+**			of the string, otherwise NULL is returned
+*/
 
 char	*ft_strchr(const char *s, int c)
 {
 	char			*new_str;
-	size_t			index;
-	size_t			len;
 
-	len = ft_strlen(s);
 	new_str = (char *)s;
-	index = 0;
 	while (1)
 	{
 		if (*new_str == c)
 			return (new_str);
 		else if (*new_str == 0)
 			return (NULL);
-		index++;
 		new_str++;
 	}
 }

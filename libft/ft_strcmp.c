@@ -10,7 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Compares two strings in order to see if they are the same or not
+**
+** @param	string to compare
+** @param	string to compare
+**
+** @return	the difference between two characters in the two strings,
+**			0 if the strings are the same
+*/
 
 int		ft_strcmp(const char *s1, const char *s2)
 {

@@ -10,6 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** Checks if the int is alphabetic ascii value 'a'-'z', or 'A'-'Z'
+**
+** @param 	an int
+**
+** @return	1: if the param is an ascii value 65-90 or 97-122
+**			0: otherwise
+*/
+
 int		ft_isalpha(int c)
 {
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))

@@ -6,11 +6,19 @@
 /*   By: cfredric <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 10:38:19 by cfredric          #+#    #+#             */
-/*   Updated: 2016/09/27 10:38:20 by cfredric         ###   ########.fr       */
+/*   Updated: 2016/11/18 21:48:40 by cfredric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "libft.h"
+
+/*
+** Converts the string param to an int representation
+**
+** @param 	a string to be converted to int
+**
+** @return	an int representing the string param
+*/
 
 static	int	f_isspace(int c)
 {
