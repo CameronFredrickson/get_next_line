@@ -5,162 +5,168 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfredric <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/16 11:28:08 by cfredric          #+#    #+#             */
-/*   Updated: 2016/11/21 19:19:10 by cfredric         ###   ########.fr       */
+/*   Created: 2016/11/22 21:03:49 by cfredric          #+#    #+#             */
+/*   Updated: 2016/11/22 21:03:51 by cfredric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 /*
-** Frees the necessary information, once all of the lines have been returned
-** from a t_file
+** Frees a file node and sets the head appropiately if necessary
 **
-** @param 	the address of the head of the list of t_files
-** @param 	a pointer to the file to be freed fom the list
+** @param	a pointer to the head of the list of t_files
+** @param	a pointer to a t_file node
 */
 
-static void		free_node(t_file **head, t_file *search)
+static void		free_node(t_file **head, t_file *file)
 {
-	t_file	*n_to_free;
-	t_file	*tmp;
-
-	n_to_free = *head;
-	if (n_to_free && n_to_free->next)
+	if (file->prev && file->next)
 	{
-		while (n_to_free && n_to_free->next)
-		{
-			if (n_to_free->next->fd == search->fd)
-			{
-				tmp = n_to_free->next;
-				n_to_free->next = tmp->next;
-				free(tmp->content);
-				free(tmp);
-				return ;
-			}
-			n_to_free = n_to_free->next;
-		}
+		file->prev->next = file->next;
+		file->next->prev = file->prev;
 	}
-	if (n_to_free->fd == search->fd)
+	else if (file->next)
 	{
-		free(n_to_free->content);
-		free(n_to_free);
+		file->next->prev = file->prev;
+		*head = file->next;
+	}
+	else if (file->prev)
+		file->prev->next = file->next;
+	else
 		*head = 0;
-	}
+	free_arr(file->content);
+	free(file);
 }
 
 /*
-** Copies the contents of a string to a new string w/o the '\n' character
+** Copies the contents of the line to be returned in to the newly allocated
+** string. The contents after the line read in the file are then moved to the
+** starting address of the content pointer. The content existing after the
+** content moved is then cleared (filled in with '\0' characters).
 **
-** @param 	a string to be copied
+** @param	a pointer to the head of the list of t_files
+** @param	a pointer to a t_file node
+** @param	the address of a character pointer where the contents of the
+**			the next line will be copied to
+** @param	the counter used to traverse the contents of a file node
 **
-** @return	a copy of the param string without '\n' character
+** @return	1: a new line was read
+**			0: there is nothing left to read from the file descriptor
 */
 
-static char		*line_cpy(char *content)
+static int		get_line(t_file **head, t_file *file, char **line, size_t i)
 {
-	char	*ln;
-	int		i;
+	int		flag;
 
-	i = 0;
-	if (!content)
-		return (ft_strnew(0));
-	while (content[i])
+	flag = 0;
+	while (i < FCU + 1)
 	{
-		if (content[i] == '\n')
+		if ((FCA)[i] == '\n' || (FCA)[i] == '\0')
+		{
+			if ((FCA)[i] == '\n')
+				flag = 1;
+			ft_memset(FCA, 0, (i + 1));
+			ft_memmove(FCA, (FCA + i + 1), (FCU - i));
+			ft_memset(FCA + ft_strlen(FCA) + 1, 0, FCS - ft_strlen(FCA));
+			FCU -= (i + 1);
 			break ;
+		}
+		(*line)[i] = (FCA)[i];
 		i++;
 	}
-	ln = ft_strnew(i);
-	i = 0;
-	while (content[i])
-	{
-		if (content[i] == '\n')
-			break ;
-		ln[i] = content[i];
-		i++;
-	}
-	return (ln);
-}
-
-/*
-** Sets the line pointer to the next line in the file
-**
-** @param 	the address of the head of the list of t_files
-** @param 	the address of a string to which the line from a
-** file descriptor will be stored
-**
-** @return	1: a new line has been read
-** @return	0: reading has been completed
-*/
-
-static int		get_line(t_file **head, t_file *file, char **line)
-{
-	char	*content;
-	int		len;
-
-	content = file->content_p;
-	*line = line_cpy(content);
-	len = (int)ft_strlen(*line);
-	if (content[len] == '\n')
-		file->content_p += (len + 1);
-	else if (content[len] == '\0')
-		file->content_p += len;
-	if (content[len] == '\n' || (content[len] == '\0' && len > 0))
+	if (flag || ((FCA)[i] == '\0' && **line))
 		return (1);
 	free_node(head, file);
 	return (0);
 }
 
 /*
-** Stores the contents of a file descriptor in a t_file added
-** to a list of t_files
+** Allocates a new node to be used to hold the information of a file
 **
-** @param 	the address of the head of the list of t_files
-** @param 	the file descriptor to be read from
+** @param	a pointer to the head of the list of t_files
+** @param	a pointer to a t_file node
+** @param	a file descriptor to be stored in a node
 **
-** @return	the newly created t_file
+** @return	the newly allocated node, or 0 if a call to malloc fails
 */
 
-static t_file	*store_file(t_file **file_p, int fd)
+static t_file	*create_node(t_file **head, t_file *file, int fd)
 {
-	t_file	*file;
-	char	*new_content;
-	int		status;
-	char	buf[BUFF_SIZE];
+	t_dynamic_arr	*arr;
 
-	ft_memset(buf, 0, BUFF_SIZE);
-	if (!(file = (t_file *)malloc(sizeof(t_file))))
+	if (!((file = (t_file *)malloc(sizeof(t_file)))))
 		return (0);
-	file->content = 0;
+	if (!((arr = (t_dynamic_arr *)malloc(sizeof(t_dynamic_arr)))))
+		return (0);
 	file->fd = fd;
 	file->next = 0;
-	while ((status = (int)read(fd, buf, BUFF_SIZE)))
+	file->prev = 0;
+	file->content = init_arr(arr, 2);
+	if (*head)
 	{
-		if (status == -1)
-			return (0);
-		new_content = ft_strnew(ft_strlen(file->content) + status);
-		ft_strcpy(new_content, file->content);
-		if (file->content)
-			free(file->content);
-		ft_strncat(new_content, buf, status);
-		file->content = new_content;
-		file->content_p = new_content;
+		file->next = *head;
+		(*head)->prev = file;
 	}
-	(*file_p) ? (file->next = *file_p) : (file);
-	return (*file_p = file);
+	*head = file;
+	return (file);
 }
 
 /*
-** Gets a line of characters from a file descriptor
+** Attempts to read BUFF_SIZE characters from a file descriptor.
+** The characters read are stored in the content member of a
+** pointer to t_file. The read buffer is then checked for a '\n'
+** character, if one is found the reading stops, otherwise
+** the reading continues until read returns 0.
 **
-** @param 	the address of a string to which the line from a
-** file descriptor will be stored
-** @param	a file descriptor
+** @param	a pointer to the head of the list of t_files
+** @param	a pointer to a t_file node
+** @param	a file descriptor to be read from
 **
-** @return	1: a new line has been read
-** @return	0: reading has been completed
-** @return	-1: an error has occured
+** @return	the pointer to t_file passed to the function
+**			0: 	-1 is returned from the read function
+**				malloc fails in the call to create_node
+**				malloc fails in the call to insert_arr
+*/
+
+static t_file	*read_line(t_file **head, t_file *file, int fd)
+{
+	int		status;
+	char	buf[BUFF_SIZE];
+	int		i;
+
+	ft_memset(buf, 0, BUFF_SIZE);
+	if (!file)
+		if (!(file = create_node(head, file, fd)))
+			return (0);
+	while ((status = read(fd, buf, BUFF_SIZE)))
+	{
+		if (status == -1)
+			return (0);
+		i = 0;
+		while (i < status)
+		{
+			if (!(insert_arr(file->content, buf[i++])))
+				return (0);
+		}
+		if (ft_strnstr(buf, "\n", status))
+			break ;
+	}
+	return (file);
+}
+
+/*
+** Assigns the next line read from a file to the value of
+** the line argument passed to the function
+**
+** @param	the file descriptor from which the next line
+**			will be retrieved
+** @param	the address of a character pointer to be assigned
+**			the value of the next line read
+**
+** @return	1: the next line was succussfully retrieved
+**			0: reading of the file has finished
+**			-1: an error has occured
 */
 
 int				get_next_line(const int fd, char **line)
@@ -168,7 +174,7 @@ int				get_next_line(const int fd, char **line)
 	static t_file	*head;
 	t_file			*file;
 
-	if (BUFF_SIZE < 1 || BUFF_SIZE > 8192000 || fd < 0 || fd > 256 || !line)
+	if (BUFF_SIZE < 0 || BUFF_SIZE > 8192000 || fd < 0 || !line)
 		return (-1);
 	file = 0;
 	if (head)
@@ -176,15 +182,18 @@ int				get_next_line(const int fd, char **line)
 		file = head;
 		while (file)
 		{
-			if (file->fd == fd)
+			if (fd == file->fd)
 				break ;
 			file = file->next;
 		}
 	}
-	if (!file)
-	{
-		if (!(file = store_file(&head, fd)))
+	if (!file || !(ft_strchr(FCA, '\n')))
+		if (!(file = read_line(&head, file, fd)))
 			return (-1);
-	}
-	return (get_line(&head, file, line));
+	if (!(*line = ft_strchr(FCA, '\n')))
+		if (!(*line = ft_strnew(ft_strlen(FCA))))
+			return (-1);
+	if (**line == '\n' && !(*line = ft_strnew((*line - FCA))))
+		return (-1);
+	return (get_line(&head, file, line, 0));
 }

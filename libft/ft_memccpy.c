@@ -45,6 +45,5 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 		dst_cast++;
 		src_cast++;
 	}
-	dst_cast = NULL;
-	return (dst_cast);
+	return (NULL);
 }

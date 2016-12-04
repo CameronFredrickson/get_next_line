@@ -6,7 +6,7 @@
 /*   By: cfredric <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:59:00 by cfredric          #+#    #+#             */
-/*   Updated: 2016/11/29 11:06:37 by cfredric         ###   ########.fr       */
+/*   Updated: 2016/12/01 11:03:14 by cfredric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,16 @@ long				ft_int_len(long n);
 unsigned char		ft_setbit(unsigned char val, unsigned char nth_bit);
 void				ft_print_binary_octet(unsigned char octet);
 char				*ft_reverse_str(char *s);
+
+typedef	struct		s_dynamic_arr
+{
+	char			*array;
+	size_t			used;
+	size_t			size;
+}					t_dynamic_arr;
+
+t_dynamic_arr		*init_arr(t_dynamic_arr *arr, size_t initial_size);
+int					insert_arr(t_dynamic_arr *arr, char c);
+void				free_arr(t_dynamic_arr *arr);
+void				*ft_memcmove(void *dest, void *src, int c, size_t len);
 #endif

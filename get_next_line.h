@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfredric <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 19:04:33 by cfredric          #+#    #+#             */
-/*   Updated: 2016/10/27 19:04:34 by cfredric         ###   ########.fr       */
+/*   Created: 2016/11/22 21:03:56 by cfredric          #+#    #+#             */
+/*   Updated: 2016/11/22 21:03:58 by cfredric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@
 # include <stdlib.h>
 # include "libft.h"
 
-# define BUFF_SIZE 47
+# define BUFF_SIZE 1
+# define FCA file->content->array
+# define FCS file->content->size
+# define FCU file->content->used
 
 typedef	struct		s_file
 {
-	char			*content;
-	char			*content_p;
+	t_dynamic_arr	*content;
 	int				fd;
 	struct s_file	*next;
+	struct s_file	*prev;
 }					t_file;
 
 int					get_next_line(const int fd, char **line);
